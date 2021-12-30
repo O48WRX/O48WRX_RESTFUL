@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZvEg9x3ZH65EdoBmXasij2zP86RBF1MYAwwgaysnQHL/vmQSxseSRinnXPy89bBhShONS9maCoFojTUmmAWtKw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kardy\\Desktop\\Egyetem\\Szolgáltatás Orientált Programozás\\Vizsga beadandó\\O48WRX_RESTFUL\\Client\\O48WRX_RESTFULCLIENT\\O48WRX_RESTFULCLIENT\\O48WRX_RESTFULCLIENT.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kardy\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512"
+  ],
+  "logs": []
+}
