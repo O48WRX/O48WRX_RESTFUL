@@ -57,6 +57,9 @@ namespace O48WRX_RESTFULCLIENT
                 {
                     MessageBox.Show("Felhasználó megtalálva!");
                     userloggedin = new User(deserializedJSON[i].Id, deserializedJSON[i].Username, deserializedJSON[i].Password, deserializedJSON[i].IsAdmin);
+                    Menu menu = new Menu();
+                    menu.Show();
+                    this.Hide();
                     return;
                 }
             }

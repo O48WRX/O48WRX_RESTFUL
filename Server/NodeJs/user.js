@@ -33,6 +33,11 @@ const swaggerOptions ={
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
+app.use(function (req, res, next) {
+  res.header("Content-Type",'application/json');
+  next();
+});
+
 //MySQL
 var connection = mysql.createConnection({
   host : 'localhost',
