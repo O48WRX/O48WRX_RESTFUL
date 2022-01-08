@@ -19,6 +19,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
         {
             InitializeComponent();
             transfertoken = token;
+            MessageBox.Show(MD5Crypt.Encrypt("AdminToken"));
         }
 
         private void TD_TokenSend_Click(object sender, EventArgs e)
@@ -28,7 +29,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 MessageBox.Show("Az kódmező nem lehet üres!");
                 return;
             }
-            if (MD5Crypt.Encrypt(TD_TokenBox.Text) == "6eeb08e18ea7ee9335ec2d46793ea1bd")
+            if (MD5Crypt.Encrypt(TD_TokenBox.Text) == "1HDG6HyZ/XNDmi64zFI7eg==")
             {
                 string data = TD_TokenBox.Text;
                 transfertoken.Invoke(data);

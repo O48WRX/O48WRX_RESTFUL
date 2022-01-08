@@ -120,6 +120,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.USERS_Update.TabIndex = 8;
             this.USERS_Update.Text = "Szerkeszt";
             this.USERS_Update.UseVisualStyleBackColor = true;
+            this.USERS_Update.Click += new System.EventHandler(this.USERS_Update_Click);
             // 
             // USERS_Delete
             // 
@@ -129,6 +130,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.USERS_Delete.TabIndex = 9;
             this.USERS_Delete.Text = "Töröl";
             this.USERS_Delete.UseVisualStyleBackColor = true;
+            this.USERS_Delete.Click += new System.EventHandler(this.USERS_Delete_Click);
             // 
             // label4
             // 

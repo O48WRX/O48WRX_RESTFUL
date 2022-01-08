@@ -54,24 +54,112 @@ namespace O48WRX_RESTFULCLIENT.Forms
 
         private void USERS_Create_Click(object sender, EventArgs e)
         {
-            if (Form1.userloggedin.IsAdmin == 0)
-            {
-                MessageBox.Show("Nincs jogosultsága ehhez a művelethez!");
-                return;
-            }
+            //if (Form1.userloggedin.IsAdmin == 0)
+            //{
+            //    MessageBox.Show("Nincs jogosultsága ehhez a művelethez!");
+            //    MessageBox.Show(Form1.userloggedin.IsAdmin.ToString() + Form1.userloggedin.Username + Form1.userloggedin.Password);
+            //    return;
+            //}
 
-            if (AdminToken == "")
+            if (AdminToken == null)
             {
                 TokenDialog token = new TokenDialog(TransferToken);
                 token.ShowDialog();
+                return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/user", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/adduser/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
+            var request = new RestRequest(Method.POST);
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddJsonBody(new
+            {
+                username = USERS_NameBox.Text,
+                password = USERS_PwBox.Text,
+                isAdmin = int.Parse(USERS_IsAdmin.Text)
+            });
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.StatusDescription);
+                return;
+            }
+
+            Users2DataGrid();
         }
 
         public void SetToken(string token)
         {
             AdminToken = token;
+        }
+
+        private void USERS_Update_Click(object sender, EventArgs e)
+        {
+            if (AdminToken == null)
+            {
+                TokenDialog token = new TokenDialog(TransferToken);
+                token.ShowDialog();
+                return;
+            }
+
+            if (USERS_IDBOX.Text == "" || USERS_IDBOX.Text == null)
+            {
+                MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            client = new RestClient(string.Format("http://{0}:{1}/updateuser/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(USERS_IDBOX.Text)));
+            var request = new RestRequest(Method.PUT);
+
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddJsonBody(new
+            {
+                username = USERS_NameBox.Text,
+                password = USERS_PwBox.Text,
+                isAdmin = int.Parse(USERS_IsAdmin.Text)
+            });
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.StatusDescription);
+                return;
+            }
+
+            Users2DataGrid();
+        }
+
+        private void USERS_Delete_Click(object sender, EventArgs e)
+        {
+            if (AdminToken == null)
+            {
+                TokenDialog token = new TokenDialog(TransferToken);
+                token.ShowDialog();
+                return;
+            }
+
+            if (USERS_IDBOX.Text == "" || USERS_IDBOX.Text == null)
+            {
+                MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            client = new RestClient(string.Format("http://{0}:{1}/deluser/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(USERS_IDBOX.Text)));
+            var request = new RestRequest(Method.DELETE);
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                MessageBox.Show(response.StatusDescription);
+                return;
+            }
+
+            Users2DataGrid();
         }
     }
 }

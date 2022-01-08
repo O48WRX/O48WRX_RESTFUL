@@ -66,7 +66,7 @@ namespace O48WRX_RESTFULCLIENT
 
             if (userloggedin == null)
             {
-                MessageBox.Show("Invalid login credentials!");
+                MessageBox.Show("Helytelen bejelentkezési információk!");
                 return;
             }
         }
