@@ -23,3 +23,4 @@ C:\Users\kardy\Desktop\Egyetem\Szolgáltatás Orientált Programozás\Vizsga bea
 C:\Users\kardy\Desktop\Egyetem\Szolgáltatás Orientált Programozás\Vizsga beadandó\O48WRX_RESTFUL\Client\O48WRX_RESTFULCLIENT\O48WRX_RESTFULCLIENT\obj\Debug\net5.0-windows\O48WRX_RESTFULCLIENT.Forms.Menu.resources
 C:\Users\kardy\Desktop\Egyetem\Szolgáltatás Orientált Programozás\Vizsga beadandó\O48WRX_RESTFUL\Client\O48WRX_RESTFULCLIENT\O48WRX_RESTFULCLIENT\obj\Debug\net5.0-windows\O48WRX_RESTFULCLIENT.Forms.Users.resources
 C:\Users\kardy\Desktop\Egyetem\Szolgáltatás Orientált Programozás\Vizsga beadandó\O48WRX_RESTFUL\Client\O48WRX_RESTFULCLIENT\O48WRX_RESTFULCLIENT\obj\Debug\net5.0-windows\O48WRX_RESTFULCLIENT.Forms.TokenDialog.resources
+C:\Users\kardy\Desktop\Egyetem\Szolgáltatás Orientált Programozás\Vizsga beadandó\O48WRX_RESTFUL\Client\O48WRX_RESTFULCLIENT\O48WRX_RESTFULCLIENT\obj\Debug\net5.0-windows\O48WRX_RESTFULCLIENT.Forms.ProcessorForm.resources

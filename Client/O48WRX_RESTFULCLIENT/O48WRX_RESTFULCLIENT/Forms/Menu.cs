@@ -25,5 +25,11 @@ namespace O48WRX_RESTFULCLIENT.Forms
             Users users = new Users();
             users.Show();
         }
+
+        private void MENU_PROCESSOR_Click(object sender, EventArgs e)
+        {
+            ProcessorForm processors = new ProcessorForm();
+            processors.Show();
+        }
     }
 }

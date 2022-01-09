@@ -65,6 +65,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_PROCESSOR.TabIndex = 2;
             this.MENU_PROCESSOR.Text = "Processzorok";
             this.MENU_PROCESSOR.UseVisualStyleBackColor = true;
+            this.MENU_PROCESSOR.Click += new System.EventHandler(this.MENU_PROCESSOR_Click);
             // 
             // MENU_VGA
             // 

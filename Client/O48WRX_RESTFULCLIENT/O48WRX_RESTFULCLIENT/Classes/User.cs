@@ -64,7 +64,7 @@ namespace O48WRX_RESTFULCLIENT.Classes
             this.Id = id;
             this.Username = username;
             this.Password = password;
-            this.IsAdmin = IsAdmin;
+            this.IsAdmin = isAdmin;
         }
     }
 }

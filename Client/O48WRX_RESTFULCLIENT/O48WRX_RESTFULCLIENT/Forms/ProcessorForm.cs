@@ -13,26 +13,25 @@ using System.Windows.Forms;
 
 namespace O48WRX_RESTFULCLIENT.Forms
 {
-    public delegate void TokenTransfer(string data);
-    public partial class Users : Form
+    public partial class ProcessorForm : Form
     {
+        private string AdminToken = null;
         public TokenTransfer TransferToken;
         RestClient client = null;
-        private string AdminToken = null;
-        public Users()
+        public ProcessorForm()
         {
             InitializeComponent();
-            Users2DataGrid();
+            Proc2Grid();
             TransferToken += new TokenTransfer(SetToken);
         }
-
-        private void Users2DataGrid()
+        
+        public void Proc2Grid()
         {
-            client = new RestClient(string.Format("http://{0}:{1}/user", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/processor", Form1.server, Form1.port));
             var request = new RestRequest(Method.GET);
             request.RequestFormat = DataFormat.Json;
 
-            var response = client.Execute<List<User>>(request);
+            var response = client.Execute<List<Processors>>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -40,19 +39,20 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            List<User> users = new JsonSerializer().Deserialize<List<User>>(response);
-            USERS_Grid.DataSource = users;
+            List<Processors> processors = new JsonSerializer().Deserialize<List<Processors>>(response);
+            PROC_GRID.DataSource = processors;
         }
 
-        private void USERS_Grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void PROC_GRID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            USERS_IDBOX.Text = USERS_Grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-            USERS_NameBox.Text = USERS_Grid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            USERS_PwBox.Text = USERS_Grid.Rows[e.RowIndex].Cells[2].Value.ToString();
-            USERS_IsAdmin.Text = USERS_Grid.Rows[e.RowIndex].Cells[3].Value.ToString();
+            PROC_IDBOX.Text = PROC_GRID.Rows[e.RowIndex].Cells[0].Value.ToString();
+            PROC_MANUBOX.Text = PROC_GRID.Rows[e.RowIndex].Cells[1].Value.ToString();
+            PROC_MODELBOX.Text = PROC_GRID.Rows[e.RowIndex].Cells[2].Value.ToString();
+            PROC_CLOCKBOX.Text = PROC_GRID.Rows[e.RowIndex].Cells[3].Value.ToString();
+            PROC_PRICEBOX.Text = PROC_GRID.Rows[e.RowIndex].Cells[4].Value.ToString();
         }
 
-        private void USERS_Create_Click(object sender, EventArgs e)
+        private void PROC_Create_Click(object sender, EventArgs e)
         {
             if (Form1.userloggedin.IsAdmin == 0)
             {
@@ -67,15 +67,16 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/adduser/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/addprocessor/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
 
             request.AddJsonBody(new
             {
-                username = USERS_NameBox.Text,
-                password = USERS_PwBox.Text,
-                isAdmin = int.Parse(USERS_IsAdmin.Text)
+                manufacturer = PROC_MANUBOX.Text,
+                model = PROC_MODELBOX.Text,
+                clock = PROC_CLOCKBOX.Text,
+                price = int.Parse(PROC_PRICEBOX.Text)
             });
 
             var response = client.Execute(request);
@@ -86,15 +87,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            Users2DataGrid();
+            Proc2Grid();
         }
 
-        public void SetToken(string token)
-        {
-            AdminToken = token;
-        }
-
-        private void USERS_Update_Click(object sender, EventArgs e)
+        private void PROC_Update_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -103,22 +99,25 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (USERS_IDBOX.Text == "" || USERS_IDBOX.Text == null)
+            if (PROC_IDBOX.Text == "" || PROC_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/updateuser/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(USERS_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/updateprocessor/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(PROC_IDBOX.Text)));
             var request = new RestRequest(Method.PUT);
 
             request.RequestFormat = DataFormat.Json;
 
+            //TODO: Ha TextBoxok üresek akkor a cella értékeit használni.
+            //Vagy nem lehet üres mezőkkel updatelni.
             request.AddJsonBody(new
             {
-                username = USERS_NameBox.Text,
-                password = USERS_PwBox.Text,
-                isAdmin = int.Parse(USERS_IsAdmin.Text)
+                manufacturer = PROC_MANUBOX.Text,
+                model = PROC_MODELBOX.Text,
+                clock = PROC_CLOCKBOX.Text,
+                price = int.Parse(PROC_PRICEBOX.Text)
             });
 
             var response = client.Execute(request);
@@ -129,10 +128,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            Users2DataGrid();
+            Proc2Grid();
         }
 
-        private void USERS_Delete_Click(object sender, EventArgs e)
+        private void PROC_Delete_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -141,13 +140,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (USERS_IDBOX.Text == "" || USERS_IDBOX.Text == null)
+            if (PROC_IDBOX.Text == "" || PROC_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/deluser/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(USERS_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/delprocessor/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(PROC_IDBOX.Text)));
             var request = new RestRequest(Method.DELETE);
 
             var response = client.Execute(request);
@@ -158,7 +157,12 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            Users2DataGrid();
+            Proc2Grid();
+        }
+
+        public void SetToken(string token)
+        {
+            AdminToken = token;
         }
     }
 }
