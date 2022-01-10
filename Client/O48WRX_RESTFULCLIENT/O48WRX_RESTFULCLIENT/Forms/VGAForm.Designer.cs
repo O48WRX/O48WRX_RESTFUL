@@ -166,6 +166,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.VGA_Grid.RowTemplate.Height = 25;
             this.VGA_Grid.Size = new System.Drawing.Size(530, 515);
             this.VGA_Grid.TabIndex = 26;
+            this.VGA_Grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.VGA_Grid_CellClick);
             // 
             // label6
             // 

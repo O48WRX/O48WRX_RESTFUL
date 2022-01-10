@@ -75,6 +75,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_VGA.TabIndex = 3;
             this.MENU_VGA.Text = "Videókártyák";
             this.MENU_VGA.UseVisualStyleBackColor = true;
+            this.MENU_VGA.Click += new System.EventHandler(this.MENU_VGA_Click);
             // 
             // MENU_PSU
             // 
@@ -84,6 +85,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_PSU.TabIndex = 4;
             this.MENU_PSU.Text = "Tápegységek";
             this.MENU_PSU.UseVisualStyleBackColor = true;
+            this.MENU_PSU.Click += new System.EventHandler(this.MENU_PSU_Click);
             // 
             // MENU_RAM
             // 
@@ -93,6 +95,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_RAM.TabIndex = 5;
             this.MENU_RAM.Text = "Memória";
             this.MENU_RAM.UseVisualStyleBackColor = true;
+            this.MENU_RAM.Click += new System.EventHandler(this.MENU_RAM_Click);
             // 
             // MENU_MOBO
             // 
@@ -102,6 +105,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_MOBO.TabIndex = 6;
             this.MENU_MOBO.Text = "Alaplapok";
             this.MENU_MOBO.UseVisualStyleBackColor = true;
+            this.MENU_MOBO.Click += new System.EventHandler(this.MENU_MOBO_Click);
             // 
             // MENU_ORDERED
             // 
@@ -111,6 +115,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_ORDERED.TabIndex = 7;
             this.MENU_ORDERED.Text = "Rendelések";
             this.MENU_ORDERED.UseVisualStyleBackColor = true;
+            this.MENU_ORDERED.Click += new System.EventHandler(this.MENU_ORDERED_Click);
             // 
             // Menu
             // 

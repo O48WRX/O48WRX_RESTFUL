@@ -13,25 +13,29 @@ using System.Windows.Forms;
 
 namespace O48WRX_RESTFULCLIENT.Forms
 {
-    public partial class VGAForm : Form
+    public partial class RAMForm : Form
     {
         RestClient client = null;
         private string AdminToken = null;
         public TokenTransfer TransferToken;
-        public VGAForm()
+        public RAMForm()
         {
             InitializeComponent();
-            VGA2Grid();
             TransferToken += new TokenTransfer(SetToken);
+            Ram2Grid();
+        }
+        public void SetToken(string token)
+        {
+            AdminToken = token;
         }
 
-        public void VGA2Grid()
+        public void Ram2Grid()
         {
-            client = new RestClient(string.Format("http://{0}:{1}/vga", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/ram", Form1.server, Form1.port));
             var request = new RestRequest(Method.GET);
             request.RequestFormat = DataFormat.Json;
 
-            var response = client.Execute<List<VGA>>(request);
+            var response = client.Execute<List<RAM>>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -39,16 +43,11 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            List<VGA> cards = new JsonSerializer().Deserialize<List<VGA>>(response);
-            VGA_Grid.DataSource = cards;
+            List<RAM> ram = new JsonSerializer().Deserialize<List<RAM>>(response);
+            RAM_GRID.DataSource = ram;
         }
 
-        public void SetToken(string token)
-        {
-            AdminToken = token;
-        }
-
-        private void VGA_Create_Click(object sender, EventArgs e)
+        private void RAM_Create_Click(object sender, EventArgs e)
         {
             if (Form1.userloggedin.IsAdmin == 0)
             {
@@ -63,17 +62,17 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/addvga/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/addram/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
 
             request.AddJsonBody(new
             {
-                manufacturer = VGA_MANUBOX.Text,
-                model = VGA_MODELBOX.Text,
-                vram = int.Parse(VGA_VRAMBOX.Text),
-                clock = VGA_CLOCKBOX.Text,
-                price = int.Parse(VGA_PRICEBOX.Text)
+                manufacturer = RAM_MANUBOX.Text,
+                model = RAM_MODELBOX.Text,
+                clock = RAM_CLOCKBOX.Text,
+                capacity = RAM_CAPBOX.Text,
+                price = int.Parse(RAM_PRICEBOX.Text)
             });
 
             var response = client.Execute(request);
@@ -84,10 +83,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
+            Ram2Grid();
         }
 
-        private void VGA_Update_Click(object sender, EventArgs e)
+        private void RAM_Update_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -96,13 +95,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (VGA_IDBOX.Text == "" || VGA_IDBOX.Text == null)
+            if (RAM_IDBOX.Text == "" || RAM_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/updatevga/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(VGA_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/updateram/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(RAM_IDBOX.Text)));
             var request = new RestRequest(Method.PUT);
 
             request.RequestFormat = DataFormat.Json;
@@ -111,11 +110,11 @@ namespace O48WRX_RESTFULCLIENT.Forms
             //Vagy nem lehet üres mezőkkel updatelni.
             request.AddJsonBody(new
             {
-                manufacturer = VGA_MANUBOX.Text,
-                model = VGA_MODELBOX.Text,
-                vram = int.Parse(VGA_VRAMBOX.Text),
-                clock = VGA_CLOCKBOX.Text,
-                price = int.Parse(VGA_PRICEBOX.Text)
+                manufacturer = RAM_MANUBOX.Text,
+                model = RAM_MODELBOX.Text,
+                clock = RAM_CLOCKBOX.Text,
+                capacity = RAM_CAPBOX.Text,
+                price = int.Parse(RAM_PRICEBOX.Text)
             });
 
             var response = client.Execute(request);
@@ -126,10 +125,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
+            Ram2Grid();
         }
 
-        private void VGA_Delete_Click(object sender, EventArgs e)
+        private void RAM_Delete_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -138,13 +137,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (VGA_IDBOX.Text == "" || VGA_IDBOX.Text == null)
+            if (RAM_IDBOX.Text == "" || RAM_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/delvga/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(VGA_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/delram/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(RAM_IDBOX.Text)));
             var request = new RestRequest(Method.DELETE);
 
             var response = client.Execute(request);
@@ -155,16 +154,17 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
+            Ram2Grid();
         }
 
-        private void VGA_Grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void RAM_GRID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            VGA_IDBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-            VGA_MANUBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            VGA_MODELBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[2].Value.ToString();
-            VGA_VRAMBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            VGA_PRICEBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[4].Value.ToString();
+            RAM_IDBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[0].Value.ToString();
+            RAM_MANUBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[1].Value.ToString();
+            RAM_MODELBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[2].Value.ToString();
+            RAM_CLOCKBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[3].Value.ToString();
+            RAM_CAPBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[4].Value.ToString();
+            RAM_PRICEBOX.Text = RAM_GRID.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
     }
 }

@@ -13,25 +13,28 @@ using System.Windows.Forms;
 
 namespace O48WRX_RESTFULCLIENT.Forms
 {
-    public partial class VGAForm : Form
+    public partial class OrderedForm : Form
     {
         RestClient client = null;
         private string AdminToken = null;
         public TokenTransfer TransferToken;
-        public VGAForm()
+        public OrderedForm()
         {
             InitializeComponent();
-            VGA2Grid();
             TransferToken += new TokenTransfer(SetToken);
         }
-
-        public void VGA2Grid()
+        public void SetToken(string token)
         {
-            client = new RestClient(string.Format("http://{0}:{1}/vga", Form1.server, Form1.port));
+            AdminToken = token;
+        }
+
+        public void Orders2Grid()
+        {
+            client = new RestClient(string.Format("http://{0}:{1}/ordered", Form1.server, Form1.port));
             var request = new RestRequest(Method.GET);
             request.RequestFormat = DataFormat.Json;
 
-            var response = client.Execute<List<VGA>>(request);
+            var response = client.Execute<List<Ordered>>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -39,16 +42,22 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            List<VGA> cards = new JsonSerializer().Deserialize<List<VGA>>(response);
-            VGA_Grid.DataSource = cards;
+            List<Ordered> orders = new JsonSerializer().Deserialize<List<Ordered>>(response);
+            ORD_GRID.DataSource = orders;
         }
 
-        public void SetToken(string token)
+        private void ORD_GRID_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            AdminToken = token;
+            ORD_IDBOX.Text = ORD_GRID.Rows[e.RowIndex].Cells[0].Value.ToString();
+            ORD_USERID.Text = ORD_GRID.Rows[e.RowIndex].Cells[1].Value.ToString();
+            ORD_PROCID.Text = ORD_GRID.Rows[e.RowIndex].Cells[2].Value.ToString();
+            ORD_VGAID.Text = ORD_GRID.Rows[e.RowIndex].Cells[3].Value.ToString();
+            ORD_PSUID.Text = ORD_GRID.Rows[e.RowIndex].Cells[4].Value.ToString();
+            ORD_RAMID.Text = ORD_GRID.Rows[e.RowIndex].Cells[5].Value.ToString();
+            ORD_MOBOID.Text = ORD_GRID.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
 
-        private void VGA_Create_Click(object sender, EventArgs e)
+        private void ORD_CREATE_Click(object sender, EventArgs e)
         {
             if (Form1.userloggedin.IsAdmin == 0)
             {
@@ -63,17 +72,18 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/addvga/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
+            client = new RestClient(string.Format("http://{0}:{1}/addorder/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
 
             request.AddJsonBody(new
             {
-                manufacturer = VGA_MANUBOX.Text,
-                model = VGA_MODELBOX.Text,
-                vram = int.Parse(VGA_VRAMBOX.Text),
-                clock = VGA_CLOCKBOX.Text,
-                price = int.Parse(VGA_PRICEBOX.Text)
+                user_id = int.Parse(ORD_USERID.Text),
+                processor_id = int.Parse(ORD_PROCID.Text),
+                vga_id = int.Parse(ORD_VGAID.Text),
+                psu_id = int.Parse(ORD_PSUID.Text),
+                ram_id = int.Parse(ORD_RAMID.Text),
+                mobo_id = int.Parse(ORD_MOBOID.Text)
             });
 
             var response = client.Execute(request);
@@ -84,10 +94,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
+            Orders2Grid();
         }
 
-        private void VGA_Update_Click(object sender, EventArgs e)
+        private void ORD_UPDATE_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -96,13 +106,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (VGA_IDBOX.Text == "" || VGA_IDBOX.Text == null)
+            if (ORD_IDBOX.Text == "" || ORD_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/updatevga/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(VGA_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/updateorder/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(ORD_IDBOX.Text)));
             var request = new RestRequest(Method.PUT);
 
             request.RequestFormat = DataFormat.Json;
@@ -111,11 +121,12 @@ namespace O48WRX_RESTFULCLIENT.Forms
             //Vagy nem lehet üres mezőkkel updatelni.
             request.AddJsonBody(new
             {
-                manufacturer = VGA_MANUBOX.Text,
-                model = VGA_MODELBOX.Text,
-                vram = int.Parse(VGA_VRAMBOX.Text),
-                clock = VGA_CLOCKBOX.Text,
-                price = int.Parse(VGA_PRICEBOX.Text)
+                user_id = int.Parse(ORD_USERID.Text),
+                processor_id = int.Parse(ORD_PROCID.Text),
+                vga_id = int.Parse(ORD_VGAID.Text),
+                psu_id = int.Parse(ORD_PSUID.Text),
+                ram_id = int.Parse(ORD_RAMID.Text),
+                mobo_id = int.Parse(ORD_MOBOID.Text)
             });
 
             var response = client.Execute(request);
@@ -126,10 +137,10 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
+            Orders2Grid();
         }
 
-        private void VGA_Delete_Click(object sender, EventArgs e)
+        private void ORD_DELETE_Click(object sender, EventArgs e)
         {
             if (AdminToken == null)
             {
@@ -138,13 +149,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            if (VGA_IDBOX.Text == "" || VGA_IDBOX.Text == null)
+            if (ORD_IDBOX.Text == "" || ORD_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
                 return;
             }
 
-            client = new RestClient(string.Format("http://{0}:{1}/delvga/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(VGA_IDBOX.Text)));
+            client = new RestClient(string.Format("http://{0}:{1}/delorder/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(ORD_IDBOX.Text)));
             var request = new RestRequest(Method.DELETE);
 
             var response = client.Execute(request);
@@ -155,16 +166,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
-            VGA2Grid();
-        }
-
-        private void VGA_Grid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            VGA_IDBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-            VGA_MANUBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            VGA_MODELBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[2].Value.ToString();
-            VGA_VRAMBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            VGA_PRICEBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[4].Value.ToString();
+            Orders2Grid();
         }
     }
 }

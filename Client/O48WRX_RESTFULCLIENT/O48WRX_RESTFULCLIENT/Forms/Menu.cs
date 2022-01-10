@@ -31,5 +31,35 @@ namespace O48WRX_RESTFULCLIENT.Forms
             ProcessorForm processors = new ProcessorForm();
             processors.Show();
         }
+
+        private void MENU_VGA_Click(object sender, EventArgs e)
+        {
+            VGAForm vga = new VGAForm();
+            vga.Show();
+        }
+
+        private void MENU_PSU_Click(object sender, EventArgs e)
+        {
+            PSUForm psus = new PSUForm();
+            psus.Show();
+        }
+
+        private void MENU_RAM_Click(object sender, EventArgs e)
+        {
+            RAMForm ram = new RAMForm();
+            ram.Show();
+        }
+
+        private void MENU_MOBO_Click(object sender, EventArgs e)
+        {
+            MOBOForm mobos = new MOBOForm();
+            mobos.Show();
+        }
+
+        private void MENU_ORDERED_Click(object sender, EventArgs e)
+        {
+            OrderedForm orders = new OrderedForm();
+            orders.Show();
+        }
     }
 }
