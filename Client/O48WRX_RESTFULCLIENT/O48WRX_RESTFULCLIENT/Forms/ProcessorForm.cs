@@ -67,6 +67,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
+            int temp;
+            if (!int.TryParse(PROC_PRICEBOX.Text, out temp))
+            {
+                MessageBox.Show("Az órajel csak szám lehet!");
+                return;
+            }
+
             client = new RestClient(string.Format("http://{0}:{1}/addprocessor/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -102,6 +109,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (PROC_IDBOX.Text == "" || PROC_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(PROC_PRICEBOX.Text, out temp) || !int.TryParse(PROC_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("Az órajel, azonosító csak szám lehet!");
                 return;
             }
 
@@ -143,6 +157,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (PROC_IDBOX.Text == "" || PROC_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(PROC_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("Az azonosító csak szám lehet!");
                 return;
             }
 

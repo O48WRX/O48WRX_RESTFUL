@@ -1,4 +1,5 @@
 var http = require("http");
+const https = require('https');
 var express = require('express');
 var app = express();
 var mysql = require('mysql2');
@@ -8,6 +9,16 @@ const AdminToken = "6eeb08e18ea7ee9335ec2d46793ea1bd"; //AdminToken szó szerint
 const swaggerUI = require("swagger-ui-express");
 //const swaggerDocument = require('./swagger.json');
 const swaggerJsDoc = require("swagger-jsdoc");
+const options = {
+  hostname: '127.0.0.1',
+  port: 443,
+  path: '/SOP/PHP/ordered.php',
+  method: 'GET',
+  rejectUnauthorized: false,
+  requestCert: true,
+  agent: false
+}
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 //***************************************************
 //A swagger elérhető a 'localhost:3000/api-docs/'-on*
@@ -49,7 +60,8 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log('A csatlakozás sikerült...')
+  console.log('mySQL connection successful...')
+  console.log(' ');
 });
 
 app.use(bodyParser.json());
@@ -60,7 +72,9 @@ app.use(bodyParser.urlencoded({
 var server = app.listen(3000, "127.0.0.1", function () {
   var host = server.address().address;
   var port = server.address().port;
-  console.log("A következő portot figyeljük : https://%s:%s", host, port)
+  console.log("========================================================================================================================")
+  console.log(' ');
+  console.log("Server is listening at : https://%s:%s", host, port)
 });
 
 
@@ -240,6 +254,7 @@ var server = app.listen(3000, "127.0.0.1", function () {
 
 //USER METHODS
 app.get('/user', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM user', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -262,6 +277,7 @@ app.get('/user', function(req, res) {
  */
 
 app.get('/user/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM user WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -291,6 +307,7 @@ app.get('/user/:id', function(req, res) {
  */
 
 app.post('/adduser/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO user SET ?', postData, function(error, results, fields) {
@@ -334,6 +351,7 @@ app.post('/adduser/:token', function(req, res) {
 
 
 app.put('/updateuser/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE user SET username = "'+req.body.username+'", password = "'+req.body.password+'", isAdmin = '+req.body.isAdmin+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -393,6 +411,7 @@ app.put('/updateuser/:id/:token', function(req, res) {
  */
 
 app.delete('/deluser/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM user WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -434,6 +453,7 @@ app.delete('/deluser/:id/:token', function(req, res) {
 
 //VGA METHODS
 app.get('/vga', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM vga', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -456,6 +476,7 @@ app.get('/vga', function(req, res) {
  */
 
 app.get('/vga/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM vga WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -485,6 +506,7 @@ app.get('/vga/:id', function(req, res) {
  */
 
 app.post('/addvga/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO vga SET ?', postData, function(error, results, fields) {
@@ -526,6 +548,7 @@ app.post('/addvga/:token', function(req, res) {
   */
 
 app.put('/updatevga/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE vga SET manufacturer = "'+req.body.manufacturer+'", model = "'+req.body.model+'", vram = '+req.body.vram+', clock = "'+req.body.clock+'", price = '+req.body.price+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -585,6 +608,7 @@ app.put('/updatevga/:id/:token', function(req, res) {
  */
 
 app.delete('/delvga/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM vga WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -627,6 +651,7 @@ app.delete('/delvga/:id/:token', function(req, res) {
 
 //PROCESSOR METHODS
 app.get('/processor', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM processor', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -649,6 +674,7 @@ app.get('/processor', function(req, res) {
  */
 
 app.get('/processor/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM processor WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -678,6 +704,7 @@ app.get('/processor/:id', function(req, res) {
  */
 
 app.post('/addprocessor/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO processor SET ?', postData, function(error, results, fields) {
@@ -719,6 +746,7 @@ app.post('/addprocessor/:token', function(req, res) {
   */
 
 app.put('/updateprocessor/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE processor SET manufacturer = "'+req.body.manufacturer+'", model = "'+req.body.model+'", clock = "'+req.body.clock+'", price = '+req.body.price+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -778,6 +806,7 @@ app.put('/updateprocessor/:id/:token', function(req, res) {
  */
 
 app.delete('/delprocessor/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM processor WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -819,6 +848,7 @@ app.delete('/delprocessor/:id/:token', function(req, res) {
 
 //POWER SUPPLY UNIT METHODS
 app.get('/psu', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM psu', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -841,6 +871,7 @@ app.get('/psu', function(req, res) {
  */
 
 app.get('/psu/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM psu WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -870,6 +901,7 @@ app.get('/psu/:id', function(req, res) {
  */
 
 app.post('/addpsu/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO psu SET ?', postData, function(error, results, fields) {
@@ -911,6 +943,7 @@ app.post('/addpsu/:token', function(req, res) {
   */
 
 app.put('/updatepsu/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE psu SET manufacturer = "'+req.body.manufacturer+'", model = "'+req.body.model+'", performance = "'+req.body.performance+'", price = '+req.body.price+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -970,6 +1003,7 @@ app.put('/updatepsu/:id/:token', function(req, res) {
  */
 
 app.delete('/delpsu/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM psu WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1011,6 +1045,7 @@ app.delete('/delpsu/:id/:token', function(req, res) {
 
 //RAM METHODS
 app.get('/ram', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM ram', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -1033,6 +1068,7 @@ app.get('/ram', function(req, res) {
  */
 
 app.get('/ram/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM ram WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -1062,6 +1098,7 @@ app.get('/ram/:id', function(req, res) {
  */
 
 app.post('/addram/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO ram SET ?', postData, function(error, results, fields) {
@@ -1103,6 +1140,7 @@ app.post('/addram/:token', function(req, res) {
   */
 
 app.put('/updateram/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE ram SET manufacturer = "'+req.body.manufacturer+'", model = "'+req.body.model+'", clock = "'+req.body.clock+'", capacity = "'+req.body.capacity+'", price = '+req.body.price+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1162,6 +1200,7 @@ app.put('/updateram/:id/:token', function(req, res) {
  */
 
 app.delete('/delram/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM ram WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1203,6 +1242,7 @@ app.delete('/delram/:id/:token', function(req, res) {
 
 //MOTHERBOARD METHODS
 app.get('/mobo', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM mobo', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
@@ -1225,6 +1265,7 @@ app.get('/mobo', function(req, res) {
  */
 
 app.get('/mobo/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM mobo WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -1254,6 +1295,7 @@ app.get('/mobo/:id', function(req, res) {
  */
 
 app.post('/addmobo/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
     var postData = req.body;
     connection.query('INSERT INTO mobo SET ?', postData, function(error, results, fields) {
@@ -1295,6 +1337,7 @@ app.post('/addmobo/:token', function(req, res) {
   */
 
 app.put('/updatemobo/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE mobo SET manufacturer = "'+req.body.manufacturer+'", model = "'+req.body.model+'", ram_type = "'+req.body.ram_type+'", ram_sockets = '+req.body.ram_sockets+', price = '+req.body.price+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1354,6 +1397,7 @@ app.put('/updatemobo/:id/:token', function(req, res) {
  */
 
 app.delete('/delmobo/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM mobo WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1395,9 +1439,43 @@ app.delete('/delmobo/:id/:token', function(req, res) {
 
 //CONNECTION TABLE METHODS
 app.get('/ordered', function(req, res) {
+  console.log('Incoming GET request...');
   connection.query('SELECT * FROM ordered', function(error, results, fields) {
     if (error) throw error;
     res.json(results);
+  });
+});
+
+app.get('/orderedPHP', function(req, res1) {
+  let data = [];
+  let orders;
+  const req1 = https.request(options, res => {
+    console.log('Incoming GET request...');
+    console.log(`statusCode: ${res.statusCode}`)
+  
+    res.on('data', chunk => {
+      data.push(chunk);
+    });
+
+    res.on('end', () => {
+      console.log('Response ended: ');
+      orders = JSON.parse(Buffer.concat(data).toString());
+      res1.send(orders);
+    });
+  })
+  
+  req1.on('error', error => {
+    console.error(error)
+  })
+  req1.end();
+});
+
+app.get('/orderedINFO', function(req, res) {
+  console.log('Incoming GET INFO request...');
+  connection.query('SELECT user.username, processor.model AS processor_model, vga.model AS vga_model, psu.model AS psu_model, ram.model AS ram_model, mobo.model AS mobo_model FROM ordered INNER JOIN user ON ordered.user_id = user.id INNER JOIN processor ON processor_id = processor.id INNER JOIN vga ON vga_id = vga.id INNER JOIN psu ON psu_id = psu.id INNER JOIN ram ON ram_id = ram.id INNER JOIN mobo ON mobo_id = mobo.id WHERE user_id = '+req.body.user_id+' AND processor_id = '+req.body.processor_id+' AND vga_id = '+req.body.vga_id+' AND psu_id = '+req.body.psu_id+' AND ram_id = '+req.body.ram_id+' AND mobo_id = '+req.body.mobo_id+'', function(error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+    console.log('Sent results...');
   });
 });
 
@@ -1417,6 +1495,7 @@ app.get('/ordered', function(req, res) {
  */
 
 app.get('/ordered/:id', function(req, res) {
+  console.log('Incoming GET request...');
   console.log(req);
   connection.query('SELECT * FROM ordered WHERE id=?',[req.params.id], function(error, results, fields) {
     if (error) throw error;
@@ -1446,6 +1525,7 @@ app.get('/ordered/:id', function(req, res) {
  */
 
 app.post('/addorder/:token', function(req, res) {
+  console.log('Incoming POST request...');
   if (req.params.token == AdminToken) {
   var postData = req.body;
   connection.query('INSERT INTO ordered SET ?', postData, function(error, results, fields) {
@@ -1487,6 +1567,7 @@ app.post('/addorder/:token', function(req, res) {
   */
 
 app.put('/updateorder/:id/:token', function(req, res) {
+  console.log('Incoming PUT request...');
   if (req.params.token == AdminToken) {
     connection.query('UPDATE ordered SET user_id = '+req.body.user_id+', processor_id = '+req.body.processor_id+', vga_id = '+req.body.vga_id+', psu_id = '+req.body.psu_id+', ram_id = '+req.body.ram_id+', mobo_id = '+req.body.mobo_id+' WHERE id = '+req.params.id, function(error, results, fields) {
       if (error) throw error;
@@ -1546,6 +1627,7 @@ app.put('/updateorder/:id/:token', function(req, res) {
  */
 
 app.delete('/delorder/:id/:token', function(req, res) {
+  console.log('Incoming DELETE request...');
   if (req.params.token == AdminToken) {
     connection.query('DELETE FROM ordered WHERE id ='+req.params.id, function(error, results, fields) {
       if (error) throw error;

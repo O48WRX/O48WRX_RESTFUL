@@ -19,7 +19,8 @@ namespace O48WRX_RESTFULCLIENT.Forms
         {
             InitializeComponent();
             transfertoken = token;
-            MessageBox.Show(MD5Crypt.Encrypt("AdminToken"));
+            //MessageBox.Show(MD5Crypt.Encrypt("AdminToken"));
+            TD_TokenBox.PasswordChar = '*';
         }
 
         private void TD_TokenSend_Click(object sender, EventArgs e)

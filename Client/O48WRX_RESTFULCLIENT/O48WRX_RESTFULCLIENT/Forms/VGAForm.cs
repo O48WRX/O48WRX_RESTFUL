@@ -63,6 +63,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
+            int temp;
+            if (!int.TryParse(VGA_VRAMBOX.Text, out temp) || !int.TryParse(VGA_PRICEBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (VRAM, ár) számjegynek kell lennie!");
+                return;
+            }
+
             client = new RestClient(string.Format("http://{0}:{1}/addvga/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -99,6 +106,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (VGA_IDBOX.Text == "" || VGA_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(VGA_VRAMBOX.Text, out temp) || !int.TryParse(VGA_PRICEBOX.Text, out temp) || !int.TryParse(VGA_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (VRAM, ár, azonosító) számjegynek kell lennie!");
                 return;
             }
 
@@ -144,6 +158,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
+            int temp;
+            if (!int.TryParse(VGA_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (azonosító) számjegynek kell lennie!");
+                return;
+            }
+
             client = new RestClient(string.Format("http://{0}:{1}/delvga/{2}/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port, int.Parse(VGA_IDBOX.Text)));
             var request = new RestRequest(Method.DELETE);
 
@@ -164,7 +185,8 @@ namespace O48WRX_RESTFULCLIENT.Forms
             VGA_MANUBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[1].Value.ToString();
             VGA_MODELBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[2].Value.ToString();
             VGA_VRAMBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            VGA_PRICEBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[4].Value.ToString();
+            VGA_CLOCKBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[4].Value.ToString();
+            VGA_PRICEBOX.Text = VGA_Grid.Rows[e.RowIndex].Cells[5].Value.ToString();
         }
     }
 }

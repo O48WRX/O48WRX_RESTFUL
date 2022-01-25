@@ -63,6 +63,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
+            int temp;
+            if (!int.TryParse(MOBO_RAMSOCKETS.Text, out temp) || !int.TryParse(MOBO_PRICEBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (RAM foglalatok, ár) számjegynek kell lennie!");
+                return;
+            }
+
             client = new RestClient(string.Format("http://{0}:{1}/addmobo/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -99,6 +106,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (MOBO_IDBOX.Text == "" || MOBO_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(MOBO_IDBOX.Text, out temp) ||!int.TryParse(MOBO_RAMSOCKETS.Text, out temp) || !int.TryParse(MOBO_PRICEBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (ID, RAM foglalatok, ár) számjegynek kell lennie!");
                 return;
             }
 
@@ -141,6 +155,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (MOBO_IDBOX.Text == "" || MOBO_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(MOBO_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("Az azonosító mezőnek számjegynek kell lennie!");
                 return;
             }
 

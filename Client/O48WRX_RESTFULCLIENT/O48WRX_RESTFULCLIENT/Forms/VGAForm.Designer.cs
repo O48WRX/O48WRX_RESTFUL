@@ -51,7 +51,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(658, 286);
+            this.label5.Location = new System.Drawing.Point(706, 289);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(22, 15);
             this.label5.TabIndex = 39;
@@ -59,7 +59,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_PRICEBOX
             // 
-            this.VGA_PRICEBOX.Location = new System.Drawing.Point(658, 304);
+            this.VGA_PRICEBOX.Location = new System.Drawing.Point(706, 307);
             this.VGA_PRICEBOX.Name = "VGA_PRICEBOX";
             this.VGA_PRICEBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_PRICEBOX.TabIndex = 38;
@@ -67,7 +67,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(658, 199);
+            this.label4.Location = new System.Drawing.Point(706, 246);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 15);
             this.label4.TabIndex = 37;
@@ -75,14 +75,14 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_CLOCKBOX
             // 
-            this.VGA_CLOCKBOX.Location = new System.Drawing.Point(658, 217);
+            this.VGA_CLOCKBOX.Location = new System.Drawing.Point(706, 264);
             this.VGA_CLOCKBOX.Name = "VGA_CLOCKBOX";
             this.VGA_CLOCKBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_CLOCKBOX.TabIndex = 36;
             // 
             // VGA_Delete
             // 
-            this.VGA_Delete.Location = new System.Drawing.Point(671, 419);
+            this.VGA_Delete.Location = new System.Drawing.Point(719, 422);
             this.VGA_Delete.Name = "VGA_Delete";
             this.VGA_Delete.Size = new System.Drawing.Size(105, 32);
             this.VGA_Delete.TabIndex = 35;
@@ -92,7 +92,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_Update
             // 
-            this.VGA_Update.Location = new System.Drawing.Point(671, 381);
+            this.VGA_Update.Location = new System.Drawing.Point(719, 384);
             this.VGA_Update.Name = "VGA_Update";
             this.VGA_Update.Size = new System.Drawing.Size(105, 32);
             this.VGA_Update.TabIndex = 34;
@@ -102,7 +102,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_Create
             // 
-            this.VGA_Create.Location = new System.Drawing.Point(671, 343);
+            this.VGA_Create.Location = new System.Drawing.Point(719, 346);
             this.VGA_Create.Name = "VGA_Create";
             this.VGA_Create.Size = new System.Drawing.Size(105, 32);
             this.VGA_Create.TabIndex = 33;
@@ -113,7 +113,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(658, 155);
+            this.label3.Location = new System.Drawing.Point(706, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 15);
             this.label3.TabIndex = 32;
@@ -121,7 +121,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_MODELBOX
             // 
-            this.VGA_MODELBOX.Location = new System.Drawing.Point(658, 173);
+            this.VGA_MODELBOX.Location = new System.Drawing.Point(706, 176);
             this.VGA_MODELBOX.Name = "VGA_MODELBOX";
             this.VGA_MODELBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_MODELBOX.TabIndex = 31;
@@ -129,7 +129,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(658, 111);
+            this.label2.Location = new System.Drawing.Point(706, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 30;
@@ -137,7 +137,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_MANUBOX
             // 
-            this.VGA_MANUBOX.Location = new System.Drawing.Point(658, 129);
+            this.VGA_MANUBOX.Location = new System.Drawing.Point(706, 132);
             this.VGA_MANUBOX.Name = "VGA_MANUBOX";
             this.VGA_MANUBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_MANUBOX.TabIndex = 29;
@@ -145,7 +145,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(658, 67);
+            this.label1.Location = new System.Drawing.Point(706, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 15);
             this.label1.TabIndex = 28;
@@ -153,7 +153,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_IDBOX
             // 
-            this.VGA_IDBOX.Location = new System.Drawing.Point(658, 85);
+            this.VGA_IDBOX.Location = new System.Drawing.Point(706, 88);
             this.VGA_IDBOX.Name = "VGA_IDBOX";
             this.VGA_IDBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_IDBOX.TabIndex = 27;
@@ -164,14 +164,14 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.VGA_Grid.Location = new System.Drawing.Point(12, 20);
             this.VGA_Grid.Name = "VGA_Grid";
             this.VGA_Grid.RowTemplate.Height = 25;
-            this.VGA_Grid.Size = new System.Drawing.Size(530, 515);
+            this.VGA_Grid.Size = new System.Drawing.Size(633, 515);
             this.VGA_Grid.TabIndex = 26;
             this.VGA_Grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.VGA_Grid_CellClick);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(658, 242);
+            this.label6.Location = new System.Drawing.Point(706, 202);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 15);
             this.label6.TabIndex = 41;
@@ -179,7 +179,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // VGA_VRAMBOX
             // 
-            this.VGA_VRAMBOX.Location = new System.Drawing.Point(658, 260);
+            this.VGA_VRAMBOX.Location = new System.Drawing.Point(706, 220);
             this.VGA_VRAMBOX.Name = "VGA_VRAMBOX";
             this.VGA_VRAMBOX.Size = new System.Drawing.Size(130, 23);
             this.VGA_VRAMBOX.TabIndex = 40;

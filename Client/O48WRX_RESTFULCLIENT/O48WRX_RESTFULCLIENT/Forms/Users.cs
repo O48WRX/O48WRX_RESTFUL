@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace O48WRX_RESTFULCLIENT.Forms
 {
@@ -65,6 +66,12 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 TokenDialog token = new TokenDialog(TransferToken);
                 token.ShowDialog();
                 return;
+            }
+
+            int temp;
+            if (!int.TryParse(USERS_IsAdmin.Text, out temp))
+            {
+                MessageBox.Show("Az IsAdmin nem lehet más mint számjegy!");
             }
 
             client = new RestClient(string.Format("http://{0}:{1}/adduser/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));

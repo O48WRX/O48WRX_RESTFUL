@@ -62,9 +62,17 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 return;
             }
 
+            int temp;
+            if (!int.TryParse(RAM_PRICEBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (ár) számjegynek kell lennie!");
+                return;
+            }
+
             client = new RestClient(string.Format("http://{0}:{1}/addram/6eeb08e18ea7ee9335ec2d46793ea1bd", Form1.server, Form1.port));
             var request = new RestRequest(Method.POST);
             request.RequestFormat = DataFormat.Json;
+
 
             request.AddJsonBody(new
             {
@@ -98,6 +106,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (RAM_IDBOX.Text == "" || RAM_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(RAM_PRICEBOX.Text, out temp) || !int.TryParse(RAM_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (ár, azonosító) számjegynek kell lennie!");
                 return;
             }
 
@@ -140,6 +155,13 @@ namespace O48WRX_RESTFULCLIENT.Forms
             if (RAM_IDBOX.Text == "" || RAM_IDBOX.Text == null)
             {
                 MessageBox.Show("Az azonosító mező nem lehet üres!");
+                return;
+            }
+
+            int temp;
+            if (!int.TryParse(RAM_IDBOX.Text, out temp))
+            {
+                MessageBox.Show("A mezőknek (Azonosító) számjegynek kell lennie!");
                 return;
             }
 

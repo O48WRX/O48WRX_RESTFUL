@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace O48WRX_RESTFULCLIENT.Classes
 {
-    class Ordered
+    public class Ordered
     {
         private int id;
 

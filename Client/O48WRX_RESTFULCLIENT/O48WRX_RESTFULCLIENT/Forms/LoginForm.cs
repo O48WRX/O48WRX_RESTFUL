@@ -24,7 +24,6 @@ namespace O48WRX_RESTFULCLIENT
         {
             InitializeComponent();
             F1_PASSWORDBOX.PasswordChar = '*';
-            F1_HIDEPW.Image = O48WRX_RESTFULCLIENT.Properties.Resources.closed;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -75,18 +74,6 @@ namespace O48WRX_RESTFULCLIENT
         {
             RegistrationForm regform = new RegistrationForm();
             regform.ShowDialog();
-        }
-
-        private void F1_HIDEPW_Click(object sender, EventArgs e)
-        {
-            if (F1_PASSWORDBOX.PasswordChar == '\0')
-            {
-                F1_PASSWORDBOX.PasswordChar = '*';
-                F1_HIDEPW.Image = O48WRX_RESTFULCLIENT.Properties.Resources.closed;
-                return;
-            }
-            F1_PASSWORDBOX.PasswordChar = '\0';
-            F1_HIDEPW.Image = O48WRX_RESTFULCLIENT.Properties.Resources.open;
         }
     }
 }

@@ -37,6 +37,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_RAM = new System.Windows.Forms.Button();
             this.MENU_MOBO = new System.Windows.Forms.Button();
             this.MENU_ORDERED = new System.Windows.Forms.Button();
+            this.PHP_GRIDFORM = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +50,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_USERS
             // 
-            this.MENU_USERS.Location = new System.Drawing.Point(186, 103);
+            this.MENU_USERS.Location = new System.Drawing.Point(12, 12);
             this.MENU_USERS.Name = "MENU_USERS";
             this.MENU_USERS.Size = new System.Drawing.Size(138, 53);
             this.MENU_USERS.TabIndex = 1;
@@ -59,7 +60,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_PROCESSOR
             // 
-            this.MENU_PROCESSOR.Location = new System.Drawing.Point(186, 162);
+            this.MENU_PROCESSOR.Location = new System.Drawing.Point(186, 12);
             this.MENU_PROCESSOR.Name = "MENU_PROCESSOR";
             this.MENU_PROCESSOR.Size = new System.Drawing.Size(138, 53);
             this.MENU_PROCESSOR.TabIndex = 2;
@@ -69,7 +70,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_VGA
             // 
-            this.MENU_VGA.Location = new System.Drawing.Point(186, 221);
+            this.MENU_VGA.Location = new System.Drawing.Point(372, 12);
             this.MENU_VGA.Name = "MENU_VGA";
             this.MENU_VGA.Size = new System.Drawing.Size(138, 53);
             this.MENU_VGA.TabIndex = 3;
@@ -79,7 +80,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_PSU
             // 
-            this.MENU_PSU.Location = new System.Drawing.Point(186, 280);
+            this.MENU_PSU.Location = new System.Drawing.Point(12, 71);
             this.MENU_PSU.Name = "MENU_PSU";
             this.MENU_PSU.Size = new System.Drawing.Size(138, 53);
             this.MENU_PSU.TabIndex = 4;
@@ -89,7 +90,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_RAM
             // 
-            this.MENU_RAM.Location = new System.Drawing.Point(186, 339);
+            this.MENU_RAM.Location = new System.Drawing.Point(186, 71);
             this.MENU_RAM.Name = "MENU_RAM";
             this.MENU_RAM.Size = new System.Drawing.Size(138, 53);
             this.MENU_RAM.TabIndex = 5;
@@ -99,7 +100,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_MOBO
             // 
-            this.MENU_MOBO.Location = new System.Drawing.Point(186, 398);
+            this.MENU_MOBO.Location = new System.Drawing.Point(372, 71);
             this.MENU_MOBO.Name = "MENU_MOBO";
             this.MENU_MOBO.Size = new System.Drawing.Size(138, 53);
             this.MENU_MOBO.TabIndex = 6;
@@ -109,7 +110,7 @@ namespace O48WRX_RESTFULCLIENT.Forms
             // 
             // MENU_ORDERED
             // 
-            this.MENU_ORDERED.Location = new System.Drawing.Point(186, 458);
+            this.MENU_ORDERED.Location = new System.Drawing.Point(12, 130);
             this.MENU_ORDERED.Name = "MENU_ORDERED";
             this.MENU_ORDERED.Size = new System.Drawing.Size(138, 53);
             this.MENU_ORDERED.TabIndex = 7;
@@ -117,11 +118,22 @@ namespace O48WRX_RESTFULCLIENT.Forms
             this.MENU_ORDERED.UseVisualStyleBackColor = true;
             this.MENU_ORDERED.Click += new System.EventHandler(this.MENU_ORDERED_Click);
             // 
+            // PHP_GRIDFORM
+            // 
+            this.PHP_GRIDFORM.Location = new System.Drawing.Point(186, 130);
+            this.PHP_GRIDFORM.Name = "PHP_GRIDFORM";
+            this.PHP_GRIDFORM.Size = new System.Drawing.Size(138, 53);
+            this.PHP_GRIDFORM.TabIndex = 8;
+            this.PHP_GRIDFORM.Text = "Rendelések PHP";
+            this.PHP_GRIDFORM.UseVisualStyleBackColor = true;
+            this.PHP_GRIDFORM.Click += new System.EventHandler(this.PHP_GRIDFORM_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(522, 523);
+            this.Controls.Add(this.PHP_GRIDFORM);
             this.Controls.Add(this.MENU_ORDERED);
             this.Controls.Add(this.MENU_MOBO);
             this.Controls.Add(this.MENU_RAM);
@@ -147,5 +159,6 @@ namespace O48WRX_RESTFULCLIENT.Forms
         private System.Windows.Forms.Button MENU_RAM;
         private System.Windows.Forms.Button MENU_MOBO;
         private System.Windows.Forms.Button MENU_ORDERED;
+        private System.Windows.Forms.Button PHP_GRIDFORM;
     }
 }

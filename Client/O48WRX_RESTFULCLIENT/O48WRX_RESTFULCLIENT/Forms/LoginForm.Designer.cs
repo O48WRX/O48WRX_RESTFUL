@@ -29,7 +29,6 @@ namespace O48WRX_RESTFULCLIENT
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,13 +38,11 @@ namespace O48WRX_RESTFULCLIENT
             this.label1 = new System.Windows.Forms.Label();
             this.F1_PASSWORDBOX = new System.Windows.Forms.TextBox();
             this.F1_NAMEBOX = new System.Windows.Forms.TextBox();
-            this.F1_HIDEPW = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.F1_HIDEPW);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.F1_REG);
@@ -133,16 +130,6 @@ namespace O48WRX_RESTFULCLIENT
             this.F1_NAMEBOX.Size = new System.Drawing.Size(152, 23);
             this.F1_NAMEBOX.TabIndex = 0;
             // 
-            // F1_HIDEPW
-            // 
-            this.F1_HIDEPW.Image = ((System.Drawing.Image)(resources.GetObject("F1_HIDEPW.Image")));
-            this.F1_HIDEPW.Location = new System.Drawing.Point(22, 159);
-            this.F1_HIDEPW.Name = "F1_HIDEPW";
-            this.F1_HIDEPW.Size = new System.Drawing.Size(24, 24);
-            this.F1_HIDEPW.TabIndex = 7;
-            this.F1_HIDEPW.UseVisualStyleBackColor = true;
-            this.F1_HIDEPW.Click += new System.EventHandler(this.F1_HIDEPW_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -168,7 +155,6 @@ namespace O48WRX_RESTFULCLIENT
         private System.Windows.Forms.TextBox F1_PASSWORDBOX;
         private System.Windows.Forms.TextBox F1_NAMEBOX;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button F1_HIDEPW;
     }
 }
 
