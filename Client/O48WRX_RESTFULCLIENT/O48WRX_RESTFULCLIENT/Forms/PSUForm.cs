@@ -94,6 +94,12 @@ namespace O48WRX_RESTFULCLIENT.Forms
 
         private void PSU_Update_Click(object sender, EventArgs e)
         {
+            if (Form1.userloggedin.IsAdmin == 0)
+            {
+                MessageBox.Show("Nincs jogosultsága ehhez a művelethez!");
+                return;
+            }
+
             if (AdminToken == null)
             {
                 TokenDialog token = new TokenDialog(TransferToken);
@@ -142,6 +148,12 @@ namespace O48WRX_RESTFULCLIENT.Forms
 
         private void PSU_Delete_Click(object sender, EventArgs e)
         {
+            if (Form1.userloggedin.IsAdmin == 0)
+            {
+                MessageBox.Show("Nincs jogosultsága ehhez a művelethez!");
+                return;
+            }
+
             if (AdminToken == null)
             {
                 TokenDialog token = new TokenDialog(TransferToken);

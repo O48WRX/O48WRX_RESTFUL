@@ -38,15 +38,15 @@ namespace O48WRX_RESTFULCLIENT.Forms
                 mobo_id = '1'
             });
 
-            var response = client.Execute<ORDINFO>(request);
+            var response = client.Execute<Object>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                MessageBox.Show(response.StatusDescription);
+                MessageBox.Show(response.StatusCode.ToString());
                 return;
             }
 
-            ORDINFO orders = new JsonSerializer().Deserialize<ORDINFO>(response);
+            Object orders = new JsonSerializer().Deserialize<Object>(response);
             ORDINFO_GRID.DataSource = orders;
         }
     }
